@@ -1,23 +1,49 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View ,Image} from 'react-native';
+import { View, StyleSheet, SafeAreaView ,Image ,Platform,TextInput} from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 
-type StoryProps = {
+import Avatar from './Avatar'
 
-};
-
-export default class Story extends Component <StoryProps>{
+export default class Story extends Component {
     render() {
-      const {story:{source}} = this.props;
+    const { story: { source, user, avatar } } = this.props;
         return (
-          <Image style={styles.image} {...{source}} />
+         <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
+          <Image style={styles.image} {...{ source }} />
+          <Avatar {...{ user, avatar }} />
+        </View>
+        <View style={styles.footer}>
+          <Icon name="camera" color="white" size={28} />
+          <TextInput style={styles.input} />
+          <Icon name="message-circle" color="white" size={28} />
+        </View>
+      </SafeAreaView>
         );
     }
 }
 
 const styles = StyleSheet.create({
-image:{
-    ...StyleSheet.absoluteFillObject,
-    width:null,
-    height:null
-}
-});
+    container: {
+      flex: 1,
+    },
+    image: {
+      ...StyleSheet.absoluteFillObject,
+      width: null,
+      height: null,
+      borderRadius: 5,
+    },
+    footer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: 16,
+    },
+    input: {
+      borderWidth: 2,
+      borderColor: 'white',
+      height: 28,
+      width: 250,
+      borderRadius: Platform.OS === 'android' ? 0 : 10,
+    },
+  });
