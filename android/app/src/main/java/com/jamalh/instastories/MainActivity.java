@@ -1,4 +1,4 @@
-package com.instastories;
+package com.jamalh.instastories;
 
 import com.facebook.react.ReactActivity;
 
